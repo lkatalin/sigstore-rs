@@ -17,13 +17,13 @@ extern crate sigstore;
 
 use sigstore::oauth;
 
-
 fn main() {
-    let (authorize_url, csrf_state, client, nonce, pkce_verifier) = oauth::openidflow::OpenID::auth_url(
-        "sigstore".to_string(),
-        "".to_string(),
-        "https://oauth2.sigstore.dev/auth".to_string(),
-    );
+    let (authorize_url, csrf_state, client, nonce, pkce_verifier) =
+        oauth::openidflow::OpenID::auth_url(
+            "sigstore".to_string(),
+            "".to_string(),
+            "https://oauth2.sigstore.dev/auth".to_string(),
+        );
     if open::that(authorize_url.to_string()).is_ok() {
         println!(
             "Open this URL in your browser:\n{}\n",

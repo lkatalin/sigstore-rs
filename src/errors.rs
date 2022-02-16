@@ -14,6 +14,7 @@
 // limitations under the License.
 
 use thiserror::Error;
+//use openidconnect as oidc;
 
 pub type Result<T> = std::result::Result<T, SigstoreError>;
 
@@ -72,6 +73,11 @@ pub enum SigstoreError {
 
     #[error("Cannot pull {image}: {error}")]
     RegistryPullError { image: String, error: String },
+
+    //#[error(transparent)]
+    //RequestTokenError(#[from] oidc::RequestTokenError<oidc::reqwest::Error<reqwest::error::Error>, oidc::StandardErrorResponse<oidc::core::CoreErrorResponseType>>),
+    #[error(transparent)]
+    ParseError(#[from] url::ParseError),
 
     #[error("OCI reference not valid: {reference}")]
     OciReferenceNotValidError { reference: String },
